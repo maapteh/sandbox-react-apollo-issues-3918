@@ -1,0 +1,18 @@
+overwrite: true
+schema:
+  - './pages/api/graphql/*.graphql'
+documents: 'modules/**/*.graphql'
+generates:
+  codegen/generated/_graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      withHooks: true
+      hooksImportFrom: '@apollo/react-hooks'
+      avoidOptionals: true
+  codegen/generated/_schema.graphql:
+    plugins: 
+      - add: "\"\"\" Auto generated with codegen, do not edit overhere \"\"\""
+      - schema-ast
