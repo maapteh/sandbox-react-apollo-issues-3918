@@ -13,6 +13,5 @@ generates:
       hooksImportFrom: '@apollo/react-hooks'
       avoidOptionals: true
   codegen/generated/_schema.graphql:
-    plugins: 
-      - add: "\"\"\" Auto generated with codegen, do not edit overhere \"\"\""
+    plugins:
       - schema-ast
