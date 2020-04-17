@@ -15,7 +15,9 @@ import { toIdValue } from 'apollo-utilities';
 
 import { version, name } from '../package.json';
 
-const uri = process.env.GRAPHQL_ENDPOINT
+const isBrowser = typeof window !== 'undefined';
+
+const uri = isBrowser ? `${window.location.origin}/api/graphql` : process.env.GRAPHQL_ENDPOINT
     ? process.env.GRAPHQL_ENDPOINT
     : 'http://localhost:3000/api/graphql';
 
@@ -36,7 +38,6 @@ const cache: any = new InMemoryCache({
     resultCaching: false,
 });
 
-const isBrowser = typeof window !== 'undefined';
 
 const batchHttpLink = new BatchHttpLink({
     uri,
@@ -202,7 +203,7 @@ function createApolloClient(initialState = {}) {
             ),
         ]),
         cache: cache.restore(initialState),
-        /* defaultOptions: {
+        defaultOptions: {
             query: {
                 errorPolicy: 'all',
             },
@@ -212,6 +213,6 @@ function createApolloClient(initialState = {}) {
             watchQuery: {
                 errorPolicy: 'all',
             }
-        }, */
+        },
     });
 }
