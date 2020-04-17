@@ -26,7 +26,7 @@ Now you will see the following stack:
 - [bad component](./modules/bad/bad.tsx) component having the bug
 - [apollo client](./lib/apollo.tsx#ln205) with this settings error will not be thrown, BUT also not passed to component!
 
-So when i change the errorPolicy in the above apollo client, since i want to be able to use the error, i get the following stacktrace:
+So when i change the errorPolicy in the above apollo client not to all, since i want to be able to use the error, i get the following stacktrace:
 
 ```
 [client] render good

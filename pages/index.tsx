@@ -6,7 +6,7 @@ import { Bad } from '../modules/bad/bad';
 const IndexPage: NextPage = () => {
     return (
         <>
-            <p>Both components should query data only once server-side</p>
+            Both components should query data only once server-side
 
             <Good />
 

@@ -19,9 +19,7 @@ export const Bad = () => {
             <TitleBad>Bad</TitleBad>
             <p>{dataBad && dataBad.bad}</p>
             <p>
-                But this error actually comes from client-side call. The
-                question is when i throw the error from my server i dont want
-                the page to recall since it will put unneeded load to my server.
+                We dont get the error :(
             </p>
             {errorBad && JSON.stringify(errorBad)}
         </>
