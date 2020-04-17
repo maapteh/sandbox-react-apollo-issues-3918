@@ -9,19 +9,23 @@ const TitleBad = styled.h1`
 export const Bad = () => {
     console.log('[client] render bad');
     const {
-        data: dataBad,
-        loading: loadingBad,
-        error: errorBad,
+        data,
+        loading,
+        error,
     } = useBadQuery();
+
+    if (loading) {
+        return <>Loading</>;
+    }
 
     return (
         <>
             <TitleBad>Bad</TitleBad>
-            <p>{dataBad && dataBad.bad}</p>
-            <p>
-                We dont get the error :(
-            </p>
-            {errorBad && JSON.stringify(errorBad)}
+
+            <p>{data && data.bad}</p>
+
+            {!error && <>We dont get the error, but for sure error is thrown :(</>}
+            {error && JSON.stringify(error)}
         </>
     );
 };

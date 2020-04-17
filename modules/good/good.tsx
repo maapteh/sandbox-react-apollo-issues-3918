@@ -9,15 +9,13 @@ const TitleGood = styled.h1`
 export const Good = () => {
     console.log('[client] render good');
     const {
-        data: dataGood,
-        loading: loadingGood,
-        error: errorGood,
+        data,
     } = useGoodQuery();
 
     return (
         <>
             <TitleGood>Good</TitleGood>
-            <p>{dataGood && dataGood.good}</p>
+            <p>{data && data.good}</p>
         </>
     );
 };
