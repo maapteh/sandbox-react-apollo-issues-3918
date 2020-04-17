@@ -24,7 +24,7 @@ export const Bad = () => {
 
             <p>{data && data.bad}</p>
 
-            {!error && <>We dont get the error, but for sure error is thrown :(</>}
+            {Boolean(!error && !loading) && <>We dont get the error, but for sure error is thrown ssr ...</>}
             {error && JSON.stringify(error)}
         </>
     );
