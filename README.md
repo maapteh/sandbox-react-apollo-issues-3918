@@ -5,7 +5,7 @@
 
 - `yarn`
 - `yarn dev`
-- goto `http://localhost:3000/`
+- goto [http://localhost:3000/](http://localhost:3000/) (playground at [http://localhost:3000/api/graphql](http://localhost:3000/api/graphql))
 
 Now you will see the following stack:
 
