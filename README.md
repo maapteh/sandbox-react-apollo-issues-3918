@@ -43,3 +43,5 @@ Now the error is not passed to its component. When i change the errorPolicy in t
 ```
 
 Now you can see the treewalker throws the error (which i catch), but then client-side the call is done again... And that part should not happen, but its unclear for me with what settings.
+
+_Repo is created for [apollographql/react-apollo/issues/3918](https://github.com/apollographql/react-apollo/issues/3918), to show in [codesandbox.io](https://codesandbox.io/s/github/maapteh/sandbox-react-apollo-issues-3918) the bug
