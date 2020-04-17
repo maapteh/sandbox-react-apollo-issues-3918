@@ -4,6 +4,17 @@
 ## Pre-requisites
 
 - `yarn`
+
+## File structure
+
+- [graphql server](./pages/api/graphql/index.ts#L10) having a good and bad query resolved
+- [page](./pages/index.tsx) page showing the bug happening
+- [bad component](./modules/bad/bad.tsx) component having the bug
+- [apollo client](./lib/apollo.tsx#L206) with this settings error will not be thrown, BUT also not passed to component!
+
+
+## Development
+
 - `yarn dev`
 - goto [http://localhost:3000/](http://localhost:3000/) (playground at [http://localhost:3000/api/graphql](http://localhost:3000/api/graphql))
 
@@ -19,14 +30,7 @@ Now you will see the following stack:
 [client] render bad (nextjs rendering again)
 ```
 
-## Setup
-
-- [graphql server](./pages/api/graphql/index.ts#L10) having a good and bad query resolved
-- [page](./pages/index.tsx) page showing the bug happening
-- [bad component](./modules/bad/bad.tsx) component having the bug
-- [apollo client](./lib/apollo.tsx#L206) with this settings error will not be thrown, BUT also not passed to component!
-
-So when i change the errorPolicy in the above apollo client not to all, since i want to be able to use the error, i get the following stacktrace:
+Now the error is not passed to its component. When i change the errorPolicy in the above [apollo client](./lib/apollo.tsx#L206) not to 'all', since i want to be able to use the error, i get the following stacktrace:
 
 ```
 [client] render good
@@ -38,4 +42,4 @@ So when i change the errorPolicy in the above apollo client not to all, since i 
 [server] GraphQL server query: bad
 ```
 
-Now you can see the treewalker throws the error (which i catch), but then client-side the call is done again... And that part should not happen but its unclear for me with what settings.
+Now you can see the treewalker throws the error (which i catch), but then client-side the call is done again... And that part should not happen, but its unclear for me with what settings.
