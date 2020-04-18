@@ -1,5 +1,5 @@
 # Sample application
-> Show stacktrace when ssr error happens, and no error being passed to component but then called again client-side
+> Show stacktrace when ssr error happens, and no error being passed to component...
 
 ## Pre-requisites
 
