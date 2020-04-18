@@ -11,7 +11,7 @@ const ClientSidePage: NextPage = () => {
                 cache!
             </p>
 
-            <Good />
+            <Good ssr={false} />
 
             <p>Client-side i do get the error:</p>
 
