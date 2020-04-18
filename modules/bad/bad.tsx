@@ -29,7 +29,10 @@ export const Bad = ({ ssr = true }: Props) => {
 
             <p>
                 {Boolean(!error && !loading) && (
-                    <>We dont get the error, but for sure error is thrown ssr ...</>
+                    <>
+                        We dont get the error, but for sure error is thrown ssr
+                        ...
+                    </>
                 )}
                 {error && JSON.stringify(error)}
             </p>

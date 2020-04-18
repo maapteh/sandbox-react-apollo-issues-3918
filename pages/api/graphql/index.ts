@@ -23,12 +23,7 @@ const resolvers = {
 const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
-    formatError: (err) => {
-        // dont show stacktrace to consumers
-        delete err.stack;
-
-        return err;
-    },
+    debug: false,
 });
 
 export const config = {
