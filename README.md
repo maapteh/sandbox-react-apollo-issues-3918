@@ -10,7 +10,7 @@
 - [graphql server](./pages/api/graphql/index.ts#L10) having a good and bad query resolved
 - [page](./pages/index.tsx) page showing the bug happening
 - [bad component](./modules/bad/bad.tsx) component having the bug
-- [apollo client](./lib/apollo.tsx#L206) with this settings error will not be thrown, BUT also not passed to component!
+- [apollo client](./lib/apollo.tsx#L190) with this settings error will not be thrown, BUT also not passed to component!
 
 
 ## Development
@@ -30,7 +30,7 @@ Now you will see the following stack:
 [client] render bad (nextjs rendering again)
 ```
 
-Now the error is not passed to its component. When i change the errorPolicy in the above [apollo client](./lib/apollo.tsx#L206) not to 'all', since i want to be able to use the error, i get the following stacktrace:
+Now the error is not passed to its component. When i change the errorPolicy in the above [apollo client](./lib/apollo.tsx#L190) not to 'all', since i want to be able to use the error, i get the following stacktrace:
 
 ```
 [client] render good
