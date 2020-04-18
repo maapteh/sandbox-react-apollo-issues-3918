@@ -47,7 +47,7 @@
     "start": "NODE_ENV=production next start",
     "---- auto tooling ----": "-------------------------",
     "codegen": "graphql-codegen --config codegen.yml",
-    "prettier": "prettier \"{pages,lib,modules}/**/*.{ts,tsx}\" --write",
+    "prettier": "prettier \"{pages,lib,modules,components}/**/*.{ts,tsx}\" --write",
     "schema:diff": "graphql-inspector diff git:origin/master:codegen/generated/_schema.graphql codegen/generated/_schema.graphql"
   },
   "graphql-inspector": {

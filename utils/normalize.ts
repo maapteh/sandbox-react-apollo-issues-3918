@@ -10,6 +10,18 @@ export const normalize = css`
     padding: 20px;
     font: 16px 'Open Sans', sans-serif;
   }
+  a, a:visited {
+    color: #00ade6;
+    text-decoration: none;
+  }
+  h1 {
+    margin: 0 0 12px;
+    padding: 0;
+  }
+  p {
+    margin: 0 0 12px;
+    padding: 0;
+  }
 `;
 
 export const Normalize = createGlobalStyle`${normalize}`;

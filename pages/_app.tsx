@@ -1,4 +1,5 @@
 import App from 'next/app';
+import Link from 'next/link';
 import React from 'react';
 import { Normalize } from '../utils/normalize';
 
@@ -12,6 +13,17 @@ class MyApp extends App {
         return (
             <>
                 <Component {...pageProps} />
+
+                <p>
+                    example:{' '}
+                    <Link href="/">
+                        <a>server-side</a>
+                    </Link>{' '}
+                    <Link href="/client-side">
+                        <a>client-side</a>
+                    </Link>
+                </p>
+
                 <Normalize />
             </>
         );

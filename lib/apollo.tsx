@@ -17,7 +17,9 @@ import { version, name } from '../package.json';
 
 const isBrowser = typeof window !== 'undefined';
 
-const uri = isBrowser ? `${window.location.origin}/api/graphql` : process.env.GRAPHQL_ENDPOINT
+const uri = isBrowser
+    ? `${window.location.origin}/api/graphql`
+    : process.env.GRAPHQL_ENDPOINT
     ? process.env.GRAPHQL_ENDPOINT
     : 'http://localhost:3000/api/graphql';
 
@@ -38,7 +40,6 @@ const cache: any = new InMemoryCache({
     resultCaching: false,
 });
 
-
 const batchHttpLink = new BatchHttpLink({
     uri,
     credentials: 'include', // 'same-origin'
@@ -56,14 +57,6 @@ const httpLink = new HttpLink({
 
 let apolloClient: any = null;
 
-/**
- * Creates and provides the apolloContext
- * to a next.js PageTree. Use it by wrapping
- * your PageComponent via HOC pattern.
- * @param {Function|Class} PageComponent
- * @param {Object} [config]
- * @param {Boolean} [config.ssr=true]
- */
 export function withApollo(PageComponent: any, { ssr = true } = {}) {
     const WithApollo = ({
         apolloClient,
@@ -156,11 +149,6 @@ export function withApollo(PageComponent: any, { ssr = true } = {}) {
     return WithApollo;
 }
 
-/**
- * Always creates a new apollo client on the server
- * Creates or reuses apollo client in the browser.
- * @param  {Object} initialState
- */
 function initApolloClient(initialState = undefined) {
     // Make sure to create a new client for every server-side request so that data
     // isn't shared between connections (which would be bad)
@@ -176,10 +164,6 @@ function initApolloClient(initialState = undefined) {
     return apolloClient;
 }
 
-/**
- * Creates and configures the ApolloClient
- * @param  {Object} [initialState={}]
- */
 function createApolloClient(initialState = {}) {
     return new ApolloClient({
         name,
@@ -212,7 +196,7 @@ function createApolloClient(initialState = {}) {
             },
             watchQuery: {
                 errorPolicy: 'all',
-            }
+            },
         },
     });
 }
