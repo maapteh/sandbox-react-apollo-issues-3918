@@ -2,16 +2,10 @@ import React from 'react';
 import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
 
-import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-
-import { ApolloLink, split } from 'apollo-link';
-import { BatchHttpLink } from 'apollo-link-batch-http';
-import { onError } from 'apollo-link-error';
-import { HttpLink } from 'apollo-link-http';
-
-import { toIdValue } from 'apollo-utilities';
+import { ApolloClient, ApolloProvider, ApolloLink, HttpLink, split } from '@apollo/client';
+import { InMemoryCache } from '@apollo/client/cache';
+import { BatchHttpLink } from '@apollo/client/link/batch-http';
+import { onError } from '@apollo/client/link/error';
 
 import { version, name } from '../package.json';
 
@@ -22,23 +16,6 @@ const uri = isBrowser
     : process.env.GRAPHQL_ENDPOINT
     ? process.env.GRAPHQL_ENDPOINT
     : 'http://localhost:3000/api/graphql';
-
-const cache: any = new InMemoryCache({
-    cacheRedirects: {
-        Query: {
-            // Here we map the data we get in product list view with the one for detail view
-            // see: https://www.apollographql.com/docs/react/features/performance.html
-            getProduct: (_, args) =>
-                toIdValue(
-                    cache.config.dataIdFromObject({
-                        __typename: 'Product',
-                        id: args.id,
-                    }),
-                ),
-        },
-    },
-    resultCaching: false,
-});
 
 const batchHttpLink = new BatchHttpLink({
     uri,
@@ -112,7 +89,7 @@ export function withApollo(PageComponent: any, { ssr = true } = {}) {
                     try {
                         // Run all GraphQL queries
                         const { getDataFromTree } = await import(
-                            '@apollo/react-ssr'
+                            '@apollo/client/react/ssr'
                         );
                         await getDataFromTree(
                             <AppTree
@@ -165,9 +142,29 @@ function initApolloClient(initialState = undefined) {
 }
 
 function createApolloClient(initialState = {}) {
+    const isClientSide = typeof window !== 'undefined';
+
+    // Create the cache first, which we'll share across Apollo tooling.
+    // This is an in-memory cache. Since we'll be calling `createClient` on
+    // universally, the cache will survive until the HTTP request is
+    // responded to (on the server) or for the whole of the user's visit (in
+    // the browser)
+    const cache = new InMemoryCache({
+        // TODO: no fragments anymore
+        possibleTypes: { }
+    });
+
+    // If we're in the browser, we'd have received initial state from the
+    // server. Restore it, so the client app can continue with the same data.
+    let currentCache;
+    if (isClientSide) {
+        currentCache = cache.restore(initialState);
+    }
+
     return new ApolloClient({
         name,
         version,
+        connectToDevTools: true,
         ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
         link: ApolloLink.from([
             onError(({ graphQLErrors, networkError }) => {
@@ -181,12 +178,12 @@ function createApolloClient(initialState = {}) {
                     console.log(`[Network error]: ${networkError}`);
             }),
             split(
-                (operation) => operation.getContext().important === true,
+                (operation: any) => operation.getContext().important === true,
                 httpLink as any, // if the test is true -- debatch
                 batchHttpLink as any, // otherwise, batching is fine
             ),
         ]),
-        cache: cache.restore(initialState),
+        cache: currentCache || cache,
         defaultOptions: {
             query: {
                 errorPolicy: 'all',
