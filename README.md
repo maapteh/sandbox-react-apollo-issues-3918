@@ -46,4 +46,4 @@ Now the error is not passed to its component. When i change the errorPolicy in t
 [server] GraphQL server query: bad
 ```
 
-Now you can see the treewalker throws the error (which i catch), but then client-side the call is done again... And that part should not happen, but its unclear for me with what settings.
+Now you can see the treewalker throws the error (which i catch), but then client-side the call is done again...
