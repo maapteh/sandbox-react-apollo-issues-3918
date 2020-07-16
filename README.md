@@ -3,6 +3,8 @@
 
 _Repo is created for [apollographql/react-apollo/issues/3918](https://github.com/apollographql/react-apollo/issues/3918), to show in [codesandbox.io](https://codesandbox.io/s/github/maapteh/sandbox-react-apollo-issues-3918) the bug_
 
+**moved version 2 client example to branch: apollo-client-2**
+
 ## Pre-requisites
 
 - `yarn`
