@@ -1,7 +1,3 @@
-
-"""
-All available queries
-"""
 type Query {
     """
     Have good example which directly passes the string
@@ -11,4 +7,6 @@ type Query {
     Have a bad query which actually throws an Apollo Error
     """
     bad: String
+    """ test 401 """
+    authenticationError: String
   }

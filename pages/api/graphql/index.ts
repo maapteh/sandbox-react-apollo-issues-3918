@@ -1,9 +1,10 @@
-import { ApolloServer, gql, ApolloError } from 'apollo-server-micro';
+import { ApolloServer, gql, ApolloError, AuthenticationError } from 'apollo-server-micro';
 
 const typeDefs = gql`
     type Query {
         good: String
         bad: String
+        authenticationError: String
     }
 `;
 
@@ -16,6 +17,9 @@ const resolvers = {
         bad: () => {
             console.log('[server] GraphQL server query: bad');
             return new ApolloError('oeps');
+        },
+        authenticationError: () => {
+            throw new AuthenticationError('must authenticate');
         },
     },
 };
