@@ -1,0 +1,4 @@
+query authenticationError {
+  authenticationError
+  good
+}
